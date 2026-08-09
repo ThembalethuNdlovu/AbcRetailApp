@@ -1,0 +1,27 @@
+﻿@model CustomerProfileEntity
+@{
+    ViewData["Title"] = "Add Customer";
+}
+
+<h2>Add Customer</h2>
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label class="form-label">Full Name</label>
+        <input asp-for="FullName" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input asp-for="Email" type="email" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Phone Number</label>
+        <input asp-for="PhoneNumber" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Shipping Address</label>
+        <textarea asp-for="ShippingAddress" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

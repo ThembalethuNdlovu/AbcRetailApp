@@ -1,0 +1,43 @@
+﻿@model List<CustomerProfileEntity>
+@{
+    ViewData["Title"] = "Customers";
+}
+
+<h2>Customer Profiles <small class="text-muted">(Azure Table Storage)</small></h2>
+<a class="btn btn-success mb-3" asp-action="Create">+ Add Customer</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Shipping Address</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.FullName</td>
+                <td>@c.Email</td>
+                <td>@c.PhoneNumber</td>
+                <td>@c.ShippingAddress</td>
+                <td>
+                    <a class="btn btn-sm btn-outline-primary" asp-action="Edit" asp-route-partitionKey="@c.PartitionKey" asp-route-rowKey="@c.RowKey">Edit</a>
+                    <form asp-action="Delete" method="post" class="d-inline">
+                        <input type="hidden" name="partitionKey" value="@c.PartitionKey" />
+                        <input type="hidden" name="rowKey" value="@c.RowKey" />
+                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this customer?');">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!Model.Any())
+{
+    <p class="text-muted">No customers yet. Click "Add Customer" to create one.</p>
+}

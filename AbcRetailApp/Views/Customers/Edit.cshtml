@@ -1,0 +1,32 @@
+﻿@model CustomerProfileEntity
+@{
+    ViewData["Title"] = "Edit Customer";
+}
+
+<h2>Edit Customer</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="PartitionKey" />
+    <input type="hidden" asp-for="RowKey" />
+    <input type="hidden" asp-for="ETag" value="@Model.ETag.ToString()" />
+    <input type="hidden" asp-for="Timestamp" />
+
+    <div class="mb-3">
+        <label class="form-label">Full Name</label>
+        <input asp-for="FullName" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input asp-for="Email" type="email" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Phone Number</label>
+        <input asp-for="PhoneNumber" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Shipping Address</label>
+        <textarea asp-for="ShippingAddress" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-success">Save Changes</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
