@@ -1,0 +1,43 @@
+﻿@model ProductEntity
+@{
+    ViewData["Title"] = "Edit Product";
+    var images = ViewBag.AvailableImages as List<string> ?? new();
+}
+
+<h2>Edit Product</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="PartitionKey" />
+    <input type="hidden" asp-for="RowKey" />
+    <input type="hidden" asp-for="ETag" value="@Model.ETag.ToString()" />
+    <input type="hidden" asp-for="Timestamp" />
+
+    <div class="mb-3">
+        <label class="form-label">Product Name</label>
+        <input asp-for="ProductName" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Price</label>
+        <input asp-for="Price" type="number" step="0.01" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Stock Quantity</label>
+        <input asp-for="StockQuantity" type="number" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Product Image</label>
+        <select asp-for="ImageBlobName" class="form-select">
+            <option value="">-- No image --</option>
+            @foreach (var img in images)
+            {
+                <option value="@img">@img</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success">Save Changes</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

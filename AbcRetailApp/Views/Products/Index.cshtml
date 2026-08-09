@@ -1,0 +1,39 @@
+﻿@model List<ProductEntity>
+@{
+    ViewData["Title"] = "Products";
+    var blobUrls = ViewBag.BlobUrls as Dictionary<string, string> ?? new();
+}
+
+<h2>Products <small class="text-muted">(Azure Table Storage)</small></h2>
+<a class="btn btn-success mb-3" asp-action="Create">+ Add Product</a>
+
+<div class="row">
+    @foreach (var p in Model)
+    {
+        <div class="col-md-4">
+            <div class="card">
+                @if (!string.IsNullOrEmpty(p.ImageBlobName) && blobUrls.ContainsKey(p.ImageBlobName))
+                {
+                    <img src="@blobUrls[p.ImageBlobName]" class="card-img-top" style="height:180px;object-fit:cover;" alt="@p.ProductName" />
+                }
+                <div class="card-body">
+                    <h5 class="card-title">@p.ProductName</h5>
+                    <p class="card-text">@p.Description</p>
+                    <p class="mb-1"><strong>Price:</strong> R@p.Price.ToString("0.00")</p>
+                    <p class="mb-2"><strong>Stock:</strong> @p.StockQuantity</p>
+                    <a class="btn btn-sm btn-outline-primary" asp-action="Edit" asp-route-partitionKey="@p.PartitionKey" asp-route-rowKey="@p.RowKey">Edit</a>
+                    <form asp-action="Delete" method="post" class="d-inline">
+                        <input type="hidden" name="partitionKey" value="@p.PartitionKey" />
+                        <input type="hidden" name="rowKey" value="@p.RowKey" />
+                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this product?');">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@if (!Model.Any())
+{
+    <p class="text-muted">No products yet. Click "Add Product" to create one.</p>
+}
