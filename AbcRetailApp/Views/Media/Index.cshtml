@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Media";
+    var items = ViewBag.MediaItems as IEnumerable<dynamic> ?? Enumerable.Empty<dynamic>();
+}
+
+<h2>Media <small class="text-muted">(Azure Blob Storage)</small></h2>
+
+<form asp-action="Upload" method="post" enctype="multipart/form-data" class="mb-4 row g-2 align-items-center">
+    <div class="col-auto">
+        <input type="file" name="file" class="form-control" required />
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-success">Upload</button>
+    </div>
+</form>
+
+<div class="row">
+    @foreach (var item in items)
+    {
+        <div class="col-md-3">
+            <div class="card">
+                <img src="@item.Url" class="card-img-top" style="height:160px;object-fit:cover;" alt="@item.Name" />
+                <div class="card-body">
+                    <p class="card-text small text-truncate" title="@item.Name">@item.Name</p>
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" name="blobName" value="@item.Name" />
+                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this file?');">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@if (!items.Any())
+{
+    <p class="text-muted">No media uploaded yet.</p>
+}
