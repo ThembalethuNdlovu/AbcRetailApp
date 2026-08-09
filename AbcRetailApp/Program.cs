@@ -5,6 +5,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<AbcRetailApp.Services.TableStorageService>();
 builder.Services.AddSingleton<AbcRetailApp.Services.BlobStorageService>();
 builder.Services.AddSingleton<AbcRetailApp.Services.QueueStorageService>();
+builder.Services.AddSingleton<AbcRetailApp.Services.FileStorageService>();
 
 var app = builder.Build();
 
