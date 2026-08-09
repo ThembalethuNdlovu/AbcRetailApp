@@ -1,8 +1,51 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center mb-4">
+    <h1 class="display-5">ABC Retail — Azure Storage Solution</h1>
+    <p class="lead">A demo web app showcasing Azure Table, Blob, Queue, and File storage.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Customers &amp; Products</h5>
+                <p class="card-text">Stored in <strong>Azure Table Storage</strong>. Manage customer profiles and product records.</p>
+                <a class="btn btn-primary" asp-controller="Customers" asp-action="Index">Manage Customers</a>
+                <a class="btn btn-outline-primary" asp-controller="Products" asp-action="Index">Manage Products</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Media</h5>
+                <p class="card-text">Stored in <strong>Azure Blob Storage</strong>. Upload and view product images.</p>
+                <a class="btn btn-primary" asp-controller="Media" asp-action="Index">Manage Media</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Orders</h5>
+                <p class="card-text">Stored in <strong>Azure Queue Storage</strong>. View order/inventory processing messages.</p>
+                <a class="btn btn-primary" asp-controller="Orders" asp-action="Index">View Orders</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Logs</h5>
+                <p class="card-text">Stored in <strong>Azure File Storage</strong>. View system log files.</p>
+                <a class="btn btn-primary" asp-controller="Logs" asp-action="Index">View Logs</a>
+            </div>
+        </div>
+    </div>
 </div>
