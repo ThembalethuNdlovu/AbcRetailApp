@@ -4,6 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<AbcRetailApp.Services.TableStorageService>();
 builder.Services.AddSingleton<AbcRetailApp.Services.BlobStorageService>();
+builder.Services.AddSingleton<AbcRetailApp.Services.QueueStorageService>();
 
 var app = builder.Build();
 
