@@ -1,0 +1,51 @@
+﻿@using AbcRetailApp.Services
+@model List<OrderMessage>
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<h2>Order &amp; Inventory Processing <small class="text-muted">(Azure Queue Storage)</small></h2>
+
+<form asp-action="Send" method="post" class="row g-2 align-items-end mb-4">
+    <div class="col-auto">
+        <label class="form-label">Message Type</label>
+        <select name="messageType" class="form-select">
+            <option value="Processing Order">Processing Order</option>
+            <option value="Stock Update">Stock Update</option>
+            <option value="Image Uploaded">Image Uploaded</option>
+            <option value="Order Shipped">Order Shipped</option>
+        </select>
+    </div>
+    <div class="col-auto">
+        <label class="form-label">Details</label>
+        <input type="text" name="details" class="form-control" placeholder="e.g. Order #1023 for John Smith" required style="min-width:300px;" />
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-success">Send to Queue</button>
+    </div>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Message Type</th>
+            <th>Details</th>
+            <th>Created At (UTC)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+            <tr>
+                <td><span class="badge bg-info text-dark">@m.MessageType</span></td>
+                <td>@m.Details</td>
+                <td>@m.CreatedAt.ToString("u")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!Model.Any())
+{
+    <p class="text-muted">No queue messages yet. Add a product, upload an image, or send one manually above.</p>
+}
