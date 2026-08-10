@@ -34,10 +34,6 @@ namespace AbcRetailApp.Controllers
 
             await _queueService.SendMessageAsync(messageType, details);
 
-            // Also write a log entry for this event, tying Queue + File storage together
-            var logContent = $"[{DateTime.UtcNow:u}] Queue message sent - Type: {messageType}, Details: {details}";
-            await _fileService.WriteLogFileAsync(logContent);
-
             TempData["Message"] = "Order/inventory message sent to queue and logged.";
             return RedirectToAction(nameof(Index));
         }
