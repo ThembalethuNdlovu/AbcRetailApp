@@ -15,11 +15,9 @@ namespace AbcRetailApp.Services
     public class QueueStorageService
     {
         private readonly QueueClient _queueClient;
-        private readonly FileStorageService _fileService;
 
-        public QueueStorageService(IConfiguration configuration, FileStorageService fileService)
+        public QueueStorageService(IConfiguration configuration)
         {
-            _fileService = fileService;
             var connectionString = configuration.GetConnectionString("AzureStorage");
             _queueClient = new QueueClient(connectionString, "order-processing", new QueueClientOptions
             {
@@ -33,10 +31,6 @@ namespace AbcRetailApp.Services
             var message = new OrderMessage { MessageType = messageType, Details = details };
             var json = JsonSerializer.Serialize(message);
             await _queueClient.SendMessageAsync(json);
-
-            // Log every queue event to Azure Files, regardless of where it was triggered from
-            var logContent = $"[{DateTime.UtcNow:u}] Queue message sent - Type: {messageType}, Details: {details}";
-            await _fileService.WriteLogFileAsync(logContent);
         }
 
         // Peeks at messages without removing them from the queue, so we can display them in the UI

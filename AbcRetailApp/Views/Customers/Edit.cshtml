@@ -8,6 +8,7 @@
 <form asp-action="Edit" method="post">
     <input type="hidden" asp-for="PartitionKey" />
     <input type="hidden" asp-for="RowKey" />
+    <input type="hidden" asp-for="ETag" value="@Model.ETag.ToString()" />
     <input type="hidden" asp-for="Timestamp" />
 
     <div class="mb-3">

@@ -56,10 +56,7 @@ namespace AbcRetailApp.Services
         public async Task UpdateEntityAsync<T>(string tableName, T entity) where T : class, ITableEntity, new()
         {
             var table = GetTableClient(tableName);
-            // Use ETag.All (wildcard) instead of the entity's own ETag — avoids issues where
-            // the ETag can't be reliably round-tripped through an HTML form field, and is fine
-            // for this app since there's no concurrent multi-user editing to guard against.
-            await table.UpdateEntityAsync(entity, Azure.ETag.All, TableUpdateMode.Replace);
+            await table.UpdateEntityAsync(entity, entity.ETag, TableUpdateMode.Replace);
         }
 
         public async Task DeleteEntityAsync(string tableName, string partitionKey, string rowKey)

@@ -19,7 +19,7 @@
                 <div class="card-body">
                     <h5 class="card-title">@p.ProductName</h5>
                     <p class="card-text">@p.Description</p>
-                    <p class="mb-1"><strong>Price:</strong> R@(p.Price.ToString("0.00"))</p>
+                    <p class="mb-1"><strong>Price:</strong> R@p.Price.ToString("0.00")</p>
                     <p class="mb-2"><strong>Stock:</strong> @p.StockQuantity</p>
                     <a class="btn btn-sm btn-outline-primary" asp-action="Edit" asp-route-partitionKey="@p.PartitionKey" asp-route-rowKey="@p.RowKey">Edit</a>
                     <form asp-action="Delete" method="post" class="d-inline">

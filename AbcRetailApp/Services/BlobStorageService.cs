@@ -15,16 +15,7 @@ namespace AbcRetailApp.Services
 
             // Container that holds product images / multimedia content
             _containerClient = serviceClient.GetBlobContainerClient("product-images");
-            try
-            {
-                _containerClient.CreateIfNotExists(PublicAccessType.Blob);
-            }
-            catch (Azure.RequestFailedException)
-            {
-                // Storage account has "Allow Blob public access" disabled — fall back to a private container.
-                // Images will still upload/list correctly; just won't be viewable via direct anonymous URL.
-                _containerClient.CreateIfNotExists(PublicAccessType.None);
-            }
+            _containerClient.CreateIfNotExists(PublicAccessType.Blob);
         }
 
         public async Task<string> UploadBlobAsync(IFormFile file)
