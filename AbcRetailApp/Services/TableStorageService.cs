@@ -56,7 +56,7 @@ namespace AbcRetailApp.Services
         public async Task UpdateEntityAsync<T>(string tableName, T entity) where T : class, ITableEntity, new()
         {
             var table = GetTableClient(tableName);
-            await table.UpdateEntityAsync(entity, entity.ETag, TableUpdateMode.Replace);
+            await table.UpdateEntityAsync(entity, Azure.ETag.All, TableUpdateMode.Replace);
         }
 
         public async Task DeleteEntityAsync(string tableName, string partitionKey, string rowKey)
