@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "AbcRetailApp.Functions": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7288",
+      "launchBrowser": false
+    }
+  }
+}
