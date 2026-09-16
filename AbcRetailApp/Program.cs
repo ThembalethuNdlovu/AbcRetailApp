@@ -3,17 +3,15 @@ using AbcRetailApp.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
-
-// Identity database (SQL Server / LocalDB) — separate from Azure Storage data
+// Identity database (SQL Server / LocalDB) â€” separate from Azure Storage data
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {
-    // Reasonable password rules for a coursework demo — tighten if your module requires stricter rules
+    // Reasonable password rules for a coursework demo â€” tighten if your module requires stricter rules
     options.Password.RequiredLength = 6;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
@@ -35,7 +33,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -44,7 +41,6 @@ app.UseStaticFiles();
 
 app.UseRouting();
 app.UseAuthentication();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -58,6 +54,5 @@ using (var scope = app.Services.CreateScope())
 {
     await AbcRetailApp.Data.DbSeeder.SeedRolesAndAdminAsync(scope.ServiceProvider);
 }
-
 
 app.Run();
