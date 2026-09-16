@@ -53,4 +53,11 @@ app.MapControllerRoute(
 
 app.MapRazorPages();
 
+// Seed roles and default admin account on startup
+using (var scope = app.Services.CreateScope())
+{
+    await AbcRetailApp.Data.DbSeeder.SeedRolesAndAdminAsync(scope.ServiceProvider);
+}
+
+
 app.Run();
