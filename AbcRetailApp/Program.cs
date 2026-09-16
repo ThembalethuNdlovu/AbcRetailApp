@@ -19,6 +19,8 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
+builder.Services.AddTransient<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, AbcRetailApp.Services.NoOpEmailSender>();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages(); // needed for Identity's built-in UI (login/register pages use Razor Pages)
