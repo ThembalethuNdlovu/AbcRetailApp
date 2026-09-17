@@ -21,6 +21,10 @@
                         <a class="nav-link" asp-controller="Orders" asp-action="Index">Orders (Queue)</a>
                         <a class="nav-link" asp-controller="Logs" asp-action="Index">Logs (Files)</a>
                     }
+                    else if (User.IsInRole("Customer"))
+                    {
+                        <a class="nav-link" asp-controller="Catalog" asp-action="Index">Shop</a>
+                    }
                 </div>
                 <div class="navbar-nav ms-auto">
                     <partial name="_LoginPartial" />
