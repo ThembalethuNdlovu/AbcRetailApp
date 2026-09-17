@@ -1,0 +1,54 @@
+﻿@model List<CartItem>
+@{
+    ViewData["Title"] = "Your Cart";
+    var grandTotal = (double)ViewBag.GrandTotal;
+}
+
+<h2>Your Cart</h2>
+
+@if (!Model.Any())
+{
+    <p class="text-muted">Your cart is empty. <a asp-controller="Catalog" asp-action="Index">Continue shopping</a>.</p>
+}
+else
+{
+    <table class="table align-middle">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Line Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>R@(item.Price.ToString("0.00"))</td>
+                    <td style="max-width:120px;">
+                        <form asp-action="UpdateQuantity" method="post" class="d-flex gap-2">
+                            <input type="hidden" name="rowKey" value="@item.ProductRowKey" />
+                            <input type="number" name="quantity" value="@item.Quantity" min="0" class="form-control form-control-sm" />
+                            <button type="submit" class="btn btn-sm btn-outline-primary">Update</button>
+                        </form>
+                    </td>
+                    <td>R@(item.LineTotal.ToString("0.00"))</td>
+                    <td>
+                        <form asp-action="Remove" method="post">
+                            <input type="hidden" name="rowKey" value="@item.ProductRowKey" />
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="text-end">
+        <h4>Grand Total: R@(grandTotal.ToString("0.00"))</h4>
+        <a asp-controller="Checkout" asp-action="Index" class="btn btn-success btn-lg">Proceed to Checkout</a>
+    </div>
+}

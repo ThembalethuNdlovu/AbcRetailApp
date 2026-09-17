@@ -2,6 +2,9 @@ using AbcRetailApp.Data;
 using AbcRetailApp.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,7 +32,13 @@ builder.Services.AddTransient<Microsoft.AspNetCore.Identity.UI.Services.IEmailSe
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages(); // needed for Identity's built-in UI (login/register pages use Razor Pages)
+builder.Services.AddRazorPages(); // needed for Identity's built-in UI (login/register pages use Razor Pages)builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 builder.Services.AddSingleton<AbcRetailApp.Services.TableStorageService>();
 builder.Services.AddSingleton<AbcRetailApp.Services.BlobStorageService>();
 builder.Services.AddSingleton<AbcRetailApp.Services.QueueStorageService>();
@@ -48,6 +57,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 
