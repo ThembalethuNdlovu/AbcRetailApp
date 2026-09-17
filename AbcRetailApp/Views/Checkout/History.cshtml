@@ -1,0 +1,33 @@
+﻿@model List<OrderEntity>
+@{
+    ViewData["Title"] = "My Orders";
+}
+
+<h2>My Order History</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Order Date</th>
+            <th>Items</th>
+            <th>Total</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.Timestamp?.ToString("dd MMM yyyy, HH:mm")</td>
+                <td>@order.ItemsSummary</td>
+                <td>R@(order.TotalAmount.ToString("0.00"))</td>
+                <td><span class="badge bg-info text-dark">@order.Status</span></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!Model.Any())
+{
+    <p class="text-muted">You haven't placed any orders yet.</p>
+}

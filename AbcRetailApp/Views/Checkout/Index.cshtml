@@ -1,0 +1,34 @@
+﻿@model List<CartItem>
+@{
+    ViewData["Title"] = "Checkout";
+    var grandTotal = (double)ViewBag.GrandTotal;
+}
+
+<h2>Checkout</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Line Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductName</td>
+                <td>@item.Quantity</td>
+                <td>R@(item.LineTotal.ToString("0.00"))</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4>Grand Total: R@(grandTotal.ToString("0.00"))</h4>
+
+<form asp-action="PlaceOrder" method="post">
+    <button type="submit" class="btn btn-success btn-lg">Place Order</button>
+    <a asp-controller="Cart" asp-action="Index" class="btn btn-secondary">Back to Cart</a>
+</form>

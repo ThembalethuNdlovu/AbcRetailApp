@@ -1,0 +1,14 @@
+﻿@model OrderEntity
+@{
+    ViewData["Title"] = "Order Confirmed";
+}
+
+<div class="text-center py-5">
+    <h2 class="text-success">✓ Order Placed Successfully!</h2>
+    <p class="lead">Thank you for your order.</p>
+    <p><strong>Order ID:</strong> @Model.RowKey</p>
+    <p><strong>Items:</strong> @Model.ItemsSummary</p>
+    <p><strong>Total:</strong> R@(Model.TotalAmount.ToString("0.00"))</p>
+    <a asp-controller="Catalog" asp-action="Index" class="btn btn-primary">Continue Shopping</a>
+    <a asp-controller="Checkout" asp-action="History" class="btn btn-outline-secondary">View Order History</a>
+</div>
