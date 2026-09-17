@@ -2,50 +2,53 @@
     ViewData["Title"] = "Home";
 }
 
-<div class="text-center mb-4">
-    <h1 class="display-5">ABC Retail — Azure Storage Solution</h1>
-    <p class="lead">A demo web app showcasing Azure Table, Blob, Queue, and File storage.</p>
+<div class="hero-banner text-center">
+    <h1><i class="bi bi-shop"></i> Welcome to ABC Retail</h1>
+    <p>Cloud-powered retail — built on Azure Table, Blob, Queue, and File Storage.</p>
+    @if (!User.Identity!.IsAuthenticated)
+    {
+        <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-light btn-lg mt-2 me-2">Get Started</a>
+        <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-light btn-lg mt-2">Login</a>
+    }
+    else if (User.IsInRole("Admin"))
+    {
+        <a asp-controller="Dashboard" asp-action="Index" class="btn btn-light btn-lg mt-2">Go to Dashboard</a>
+    }
+    else
+    {
+        <a asp-controller="Catalog" asp-action="Index" class="btn btn-light btn-lg mt-2">Start Shopping</a>
+    }
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Customers &amp; Products</h5>
-                <p class="card-text">Stored in <strong>Azure Table Storage</strong>. Manage customer profiles and product records.</p>
-                <a class="btn btn-primary" asp-controller="Customers" asp-action="Index">Manage Customers</a>
-                <a class="btn btn-outline-primary" asp-controller="Products" asp-action="Index">Manage Products</a>
+@if (!User.Identity!.IsAuthenticated)
+{
+    <div class="row text-center">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <i class="bi bi-truck fs-1 text-primary"></i>
+                    <h5 class="card-title mt-2">Fast Fulfillment</h5>
+                    <p class="card-text text-muted">Orders processed reliably through Azure Queue Storage.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <i class="bi bi-images fs-1 text-primary"></i>
+                    <h5 class="card-title mt-2">Rich Media</h5>
+                    <p class="card-text text-muted">Product images served from scalable Azure Blob Storage.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <i class="bi bi-shield-check fs-1 text-primary"></i>
+                    <h5 class="card-title mt-2">Secure Accounts</h5>
+                    <p class="card-text text-muted">Role-based access with ASP.NET Core Identity.</p>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Media</h5>
-                <p class="card-text">Stored in <strong>Azure Blob Storage</strong>. Upload and view product images.</p>
-                <a class="btn btn-primary" asp-controller="Media" asp-action="Index">Manage Media</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Orders</h5>
-                <p class="card-text">Stored in <strong>Azure Queue Storage</strong>. View order/inventory processing messages.</p>
-                <a class="btn btn-primary" asp-controller="Orders" asp-action="Index">View Orders</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row mt-3">
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Logs</h5>
-                <p class="card-text">Stored in <strong>Azure File Storage</strong>. View system log files.</p>
-                <a class="btn btn-primary" asp-controller="Logs" asp-action="Index">View Logs</a>
-            </div>
-        </div>
-    </div>
-</div>
+}

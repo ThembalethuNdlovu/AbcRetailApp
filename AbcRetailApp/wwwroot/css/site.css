@@ -1,7 +1,141 @@
+:root {
+    --brand-primary: #1a3a5c;
+    --brand-accent: #ff7a45;
+    --brand-light: #f7f9fb;
+    --brand-success: #2e9e6b;
+    --radius: 10px;
+}
+
 body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--brand-light);
+    color: #2b2f36;
     padding-bottom: 40px;
 }
 
+h1, h2, h3, h4, h5, .navbar-brand {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Navbar */
+.app-navbar {
+    background: linear-gradient(90deg, var(--brand-primary), #26517d);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+    .app-navbar .navbar-brand {
+        font-weight: 700;
+        font-size: 1.35rem;
+        color: #fff;
+    }
+
+    .app-navbar .nav-link {
+        color: rgba(255,255,255,0.85) !important;
+        font-weight: 500;
+        padding: 0.4rem 0.75rem;
+        border-radius: 6px;
+        transition: background-color 0.15s ease;
+    }
+
+        .app-navbar .nav-link:hover {
+            background-color: rgba(255,255,255,0.12);
+            color: #fff !important;
+        }
+
+/* Cards */
 .card {
-    margin-bottom: 1rem;
+    border: none;
+    border-radius: var(--radius);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    margin-bottom: 1.25rem;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+    .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.10);
+    }
+
+.card-body {
+    padding: 1.25rem;
+}
+
+.card-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    padding: 0.5rem 1.1rem;
+}
+
+.btn-success {
+    background-color: var(--brand-success);
+    border-color: var(--brand-success);
+}
+
+.btn-primary {
+    background-color: var(--brand-primary);
+    border-color: var(--brand-primary);
+}
+
+    .btn-primary:hover {
+        background-color: #14304c;
+        border-color: #14304c;
+    }
+
+/* Hero banner */
+.hero-banner {
+    background: linear-gradient(120deg, var(--brand-primary), #2f6690);
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 3.5rem 2.5rem;
+    margin-bottom: 2rem;
+}
+
+    .hero-banner h1 {
+        font-weight: 700;
+        font-size: 2.4rem;
+    }
+
+    .hero-banner p {
+        color: rgba(255,255,255,0.85);
+        font-size: 1.1rem;
+    }
+
+/* Stat cards on dashboard */
+.stat-card h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: var(--brand-primary);
+}
+
+/* Tables */
+.table {
+    background: #fff;
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+    .table thead {
+        background-color: var(--brand-primary);
+        color: #fff;
+    }
+
+/* Badges */
+.badge.bg-danger {
+    background-color: #e05a4e !important;
+}
+
+.badge.bg-info {
+    background-color: #3d8bcd !important;
+}
+
+.container {
+    max-width: 1200px;
 }
