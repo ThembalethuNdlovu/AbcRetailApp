@@ -15,6 +15,7 @@
                 <div class="navbar-nav">
                     @if (User.IsInRole("Admin"))
                     {
+                        <a class="nav-link" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
                         <a class="nav-link" asp-controller="Customers" asp-action="Index">Customers (Table)</a>
                         <a class="nav-link" asp-controller="Products" asp-action="Index">Products (Table)</a>
                         <a class="nav-link" asp-controller="Media" asp-action="Index">Media (Blob)</a>

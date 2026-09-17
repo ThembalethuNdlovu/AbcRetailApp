@@ -1,0 +1,121 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+    var lowStock = ViewBag.LowStockProducts as List<ProductEntity> ?? new();
+    var recentOrders = ViewBag.RecentOrders as List<OrderEntity> ?? new();
+}
+
+<h2 class="mb-4">Admin Dashboard</h2>
+
+<div class="row">
+    <div class="col-md-2">
+        <div class="card text-center">
+            <div class="card-body">
+                <h6 class="text-muted">Customers</h6>
+                <h2>@ViewBag.CustomerCount</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card text-center">
+            <div class="card-body">
+                <h6 class="text-muted">Products</h6>
+                <h2>@ViewBag.ProductCount</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card text-center">
+            <div class="card-body">
+                <h6 class="text-muted">Orders</h6>
+                <h2>@ViewBag.OrderCount</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h6 class="text-muted">Total Revenue</h6>
+                <h2>R@(((double)ViewBag.TotalRevenue).ToString("0.00"))</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h6 class="text-muted">Media Files / Logs</h6>
+                <h2>@ViewBag.MediaCount / @ViewBag.LogCount</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Low Stock Alert (≤ 3 units)</div>
+            <div class="card-body">
+                @if (lowStock.Any())
+                {
+                    <table class="table table-sm">
+                        <thead><tr><th>Product</th><th>Stock</th></tr></thead>
+                        <tbody>
+                            @foreach (var p in lowStock)
+                            {
+                                <tr>
+                                    <td>@p.ProductName</td>
+                                    <td><span class="badge bg-danger">@p.StockQuantity</span></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p class="text-muted mb-0">All products are well stocked.</p>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Recent Orders</div>
+            <div class="card-body">
+                @if (recentOrders.Any())
+                {
+                    <table class="table table-sm">
+                        <thead><tr><th>Customer</th><th>Items</th><th>Total</th></tr></thead>
+                        <tbody>
+                            @foreach (var o in recentOrders)
+                            {
+                                <tr>
+                                    <td>@o.CustomerEmail</td>
+                                    <td class="small">@o.ItemsSummary</td>
+                                    <td>R@(o.TotalAmount.ToString("0.00"))</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p class="text-muted mb-0">No orders yet.</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">Quick Links</div>
+            <div class="card-body d-flex gap-2 flex-wrap">
+                <a asp-controller="Customers" asp-action="Index" class="btn btn-outline-primary">Manage Customers</a>
+                <a asp-controller="Products" asp-action="Index" class="btn btn-outline-primary">Manage Products</a>
+                <a asp-controller="Media" asp-action="Index" class="btn btn-outline-primary">Manage Media</a>
+                <a asp-controller="Orders" asp-action="Index" class="btn btn-outline-primary">View Orders (Queue)</a>
+                <a asp-controller="Logs" asp-action="Index" class="btn btn-outline-primary">View Logs</a>
+            </div>
+        </div>
+    </div>
+</div>
