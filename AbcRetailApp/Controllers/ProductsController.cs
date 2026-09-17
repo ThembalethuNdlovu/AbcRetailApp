@@ -1,9 +1,11 @@
 ﻿using AbcRetailApp.Models;
 using AbcRetailApp.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AbcRetailApp.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductsController : Controller
     {
         private const string TableName = "Products";

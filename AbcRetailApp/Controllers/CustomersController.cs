@@ -1,10 +1,12 @@
 ﻿using AbcRetailApp.Models;
 using AbcRetailApp.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AbcRetailApp.Controllers
 {
-    public class CustomersController : Controller
+        [Authorize(Roles = "Admin")]
+        public class CustomersController : Controller
     {
         private const string TableName = "CustomerProfiles";
         private readonly TableStorageService _tableService;

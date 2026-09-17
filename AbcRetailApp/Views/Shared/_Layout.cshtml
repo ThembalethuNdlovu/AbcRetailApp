@@ -13,11 +13,17 @@
             <div class="container">
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index">ABC Retail</a>
                 <div class="navbar-nav">
-                    <a class="nav-link" asp-controller="Customers" asp-action="Index">Customers (Table)</a>
-                    <a class="nav-link" asp-controller="Products" asp-action="Index">Products (Table)</a>
-                    <a class="nav-link" asp-controller="Media" asp-action="Index">Media (Blob)</a>
-                    <a class="nav-link" asp-controller="Orders" asp-action="Index">Orders (Queue)</a>
-                    <a class="nav-link" asp-controller="Logs" asp-action="Index">Logs (Files)</a>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a class="nav-link" asp-controller="Customers" asp-action="Index">Customers (Table)</a>
+                        <a class="nav-link" asp-controller="Products" asp-action="Index">Products (Table)</a>
+                        <a class="nav-link" asp-controller="Media" asp-action="Index">Media (Blob)</a>
+                        <a class="nav-link" asp-controller="Orders" asp-action="Index">Orders (Queue)</a>
+                        <a class="nav-link" asp-controller="Logs" asp-action="Index">Logs (Files)</a>
+                    }
+                </div>
+                <div class="navbar-nav ms-auto">
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>

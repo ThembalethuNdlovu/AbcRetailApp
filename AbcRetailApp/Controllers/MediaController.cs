@@ -1,8 +1,10 @@
 ﻿using AbcRetailApp.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AbcRetailApp.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class MediaController : Controller
     {
         private readonly BlobStorageService _blobService;
