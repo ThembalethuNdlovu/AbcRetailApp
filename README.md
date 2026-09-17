@@ -2,8 +2,8 @@
 
 A full-stack cloud-native retail web application built for the Cloud Development module, demonstrating Azure Storage integration, Azure Functions, and role-based e-commerce functionality on Azure App Service.
 
-**Live Web App:** https://[yourstudentnumber].azurewebsites.net](https://st10099281ts-dtfdhrbmdqgbfdat.austriaeast-01.azurewebsites.net/
-**Live Function App:** [https://abcretail-functions-10099281-[suffix].azurewebsites.net](https://abcretail-functions-10099281-drdfczawgsb7a2cp.austriaeast-01.azurewebsites.net/)
+**Live Web App:** https://st10099281ts-dtfdhrbmdqgbfdat.austriaeast-01.azurewebsites.net/
+**Live Function App:** https://abcretail-functions-10099281-drdfczawgsb7a2cp.austriaeast-01.azurewebsites.net/
 **Module:** Cloud Development
 **Projects:** Project 1 — Azure Storage Solution · Project 2 — Integrating Azure Services into a Web Application
 
